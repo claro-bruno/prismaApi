@@ -6,6 +6,8 @@ interface ICreateClient {
     username: string;
     password: string;
 }
+
+//aqui
 export class CreateClientUseCase {
     async execute({ username, password } : ICreateClient): Promise<any>{
         //validar se o client existe
