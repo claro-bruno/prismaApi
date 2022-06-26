@@ -1,6 +1,5 @@
 import {Request, Response, NextFunction, RequestHandler, ErrorRequestHandler} from 'express';
 import { AppError } from "./AppError";
-// require("express-async-errors");
 
 const errorHandler: ErrorRequestHandler = (
 
@@ -9,8 +8,9 @@ const errorHandler: ErrorRequestHandler = (
     res ,
     _next,
 ) => {
-    if (err.message) return res.status(err.statusCode).json({ message: err.message });
-    return res.status(500).json({ message: 'Internal server error' });
+
+    if (!err.statusCode) return res.status(500).json({ message: 'Internal server error' });
+    return res.status(err.statusCode).json({ message: err.message });
 
 };
 

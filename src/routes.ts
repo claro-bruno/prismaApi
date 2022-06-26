@@ -1,6 +1,7 @@
 import {NextFunction, Request, Response, Router} from "express";
 
 import { CreateClientController } from "./modules/clients/useCases/createClient/CreateClientController";
+import {AuthenticateClientController} from "./modules/account/authenticateClient/AuthenticateClientController";
 
 const routes = Router();
 
@@ -10,6 +11,9 @@ const use = (fn: Function) => async (req: Request, res: Response, next: NextFunc
 }
 
 const createClientController = new CreateClientController();
-routes.post("/client/", use(createClientController.handle));
+const authenticateClientController = new AuthenticateClientController();
+
+routes.post("/client/", createClientController.handle);
+routes.post("/authenticate", authenticateClientController.handle);
 
 export { routes };
