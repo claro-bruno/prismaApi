@@ -6,8 +6,9 @@ import errorHandler from "./middleware/ErrorMessage";
 import {Rescue} from "express-rescue";
 
 const app = express();
-
 app.use(express.json());
+
+
 
 const use = (fn: Function) => async (req: Request, res: Response, next: NextFunction) => {
     await fn(req, res, next).catch(next)
